@@ -70,4 +70,5 @@
 
 ### Αποτίμηση
 Το project ολοκληρώθηκε σε ικανοποιητικό επίπεδο και επιβεβαίωσε ότι ανοιχτές τεχνολογίες χαμηλού κόστους μπορούν να ενσωματωθούν αποτελεσματικά στο σχολικό εργαστήριο, μετατρέποντας την κλασική εργαστηριακή άσκηση σε μια ολοκληρωμένη εμπειρία STEM με πραγματικά δεδομένα και πραγματική τεχνολογία.
-![Έξυπνο εργαστήριο ηλεκτρολογίας με Arduino, Raspberry Pi & MoodleBox | ElectroHercules](https://www.youtube.com/watch?v=IQyAFFKZETg)
+[![Έξυπνο εργαστήριο ηλεκτρολογίας με Arduino, Raspberry Pi & MoodleBox | ElectroHercules](https://img.youtube.com/vi/IQyAFFKZETg/maxresdefault.jpg)](https://www.youtube.com/watch?v=IQyAFFKZETg)  
+<small>*click image to [open video](https://www.youtube.com/watch?v=IQyAFFKZETg)*</small>

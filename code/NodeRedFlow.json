@@ -1,0 +1,1645 @@
+[
+    {
+        "id": "tab_restart_full_v1",
+        "type": "tab",
+        "label": "Project Restart Full",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "btn_board_a_v1",
+        "type": "ui-button",
+        "z": "tab_restart_full_v1",
+        "group": "ui_group_select_board_v1",
+        "name": "Πλακέτα A",
+        "label": "Πλακέτα A",
+        "order": 1,
+        "width": "3",
+        "height": "1",
+        "emulateClick": false,
+        "className": "",
+        "icon": "alpha-a-box",
+        "iconPosition": "left",
+        "payload": "A",
+        "payloadType": "str",
+        "topic": "board-select",
+        "buttonColor": "",
+        "textColor": "",
+        "x": 130,
+        "y": 270,
+        "wires": [
+            [
+                "fn_set_selected_board_v1"
+            ]
+        ]
+    },
+    {
+        "id": "btn_board_b_v1",
+        "type": "ui-button",
+        "z": "tab_restart_full_v1",
+        "group": "ui_group_select_board_v1",
+        "name": "Πλακέτα B",
+        "label": "Πλακέτα B",
+        "order": 2,
+        "width": "3",
+        "height": "1",
+        "emulateClick": false,
+        "className": "",
+        "icon": "alpha-b-box",
+        "iconPosition": "left",
+        "payload": "B",
+        "payloadType": "str",
+        "topic": "board-select",
+        "buttonColor": "",
+        "textColor": "",
+        "x": 130,
+        "y": 330,
+        "wires": [
+            [
+                "fn_set_selected_board_v1"
+            ]
+        ]
+    },
+    {
+        "id": "fn_set_selected_board_v1",
+        "type": "function",
+        "z": "tab_restart_full_v1",
+        "name": "set_selected_board",
+        "func": "flow.set('selectedBoard', msg.payload);\nflow.set('latestMeasurement', null);\n\nconst board = flow.get('selectedBoard') || '-';\n\nreturn [\n    { payload: `Επιλεγμένη πλακέτα: ${board}` },\n    { payload: { page: 'Lab Dashboard' } },\n    { payload: board, selectedBoard: board }\n];",
+        "outputs": 3,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 410,
+        "y": 300,
+        "wires": [
+            [
+                "txt_selected_board_v1"
+            ],
+            [
+                "ui_control_nav_v1"
+            ],
+            [
+                "debug_selected_board_v1"
+            ]
+        ]
+    },
+    {
+        "id": "txt_selected_board_v1",
+        "type": "ui-text",
+        "z": "tab_restart_full_v1",
+        "group": "ui_group_system_status_v1",
+        "order": 1,
+        "width": "12",
+        "height": "1",
+        "name": "Selected Board",
+        "label": "Board",
+        "format": "{{msg.payload}}",
+        "layout": "row-left",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "",
+        "className": "",
+        "x": 720,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "ui_control_nav_v1",
+        "type": "ui-control",
+        "z": "tab_restart_full_v1",
+        "name": "go_to_lab_dashboard",
+        "ui": "ui_base_1",
+        "events": "all",
+        "x": 720,
+        "y": 310,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "debug_selected_board_v1",
+        "type": "debug",
+        "z": "tab_restart_full_v1",
+        "name": "debug selected board",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "selectedBoard",
+        "statusType": "msg",
+        "x": 730,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "inject_show_initial_board_v1",
+        "type": "inject",
+        "z": "tab_restart_full_v1",
+        "name": "show stored board on deploy",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "0.5",
+        "topic": "",
+        "payload": "",
+        "payloadType": "str",
+        "x": 160,
+        "y": 210,
+        "wires": [
+            [
+                "fn_show_stored_board_v1"
+            ]
+        ]
+    },
+    {
+        "id": "fn_show_stored_board_v1",
+        "type": "function",
+        "z": "tab_restart_full_v1",
+        "name": "show_stored_board",
+        "func": "const board = flow.get('selectedBoard') || '-';\nmsg.payload = `Επιλεγμένη πλακέτα: ${board}`;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 430,
+        "y": 210,
+        "wires": [
+            [
+                "txt_selected_board_v1"
+            ]
+        ]
+    },
+    {
+        "id": "serial_in_main_v1",
+        "type": "serial in",
+        "z": "tab_restart_full_v1",
+        "name": "Arduino Serial In",
+        "serial": "f6f5b65e83687d3c",
+        "x": 120,
+        "y": 580,
+        "wires": [
+            [
+                "debug_serial_raw_v1",
+                "json_parse_main_v1"
+            ]
+        ]
+    },
+    {
+        "id": "json_parse_main_v1",
+        "type": "json",
+        "z": "tab_restart_full_v1",
+        "name": "Parse JSON",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 350,
+        "y": 580,
+        "wires": [
+            [
+                "fn_validate_measurement_v1"
+            ]
+        ]
+    },
+    {
+        "id": "fn_validate_measurement_v1",
+        "type": "function",
+        "z": "tab_restart_full_v1",
+        "name": "validate_and_store_measurement",
+        "func": "const p = msg.payload;\nconst selectedBoard = flow.get('selectedBoard');\n\nif (!selectedBoard) {\n    node.warn('No selectedBoard found. Choose board from dashboard first.');\n    return null;\n}\n\nif (!p || typeof p !== 'object') {\n    node.warn('Payload is not an object');\n    return null;\n}\n\nconst required = ['raw0','raw1','raw2','raw3','raw4'];\nfor (const key of required) {\n    if (p[key] === undefined || p[key] === null) {\n        node.warn(`Missing field: ${key}`);\n        return null;\n    }\n}\n\nconst measurement = {\n    board: String(selectedBoard),\n    raw0: Number(p.raw0),\n    raw1: Number(p.raw1),\n    raw2: Number(p.raw2),\n    raw3: Number(p.raw3),\n    raw4: Number(p.raw4),\n    ts: Date.now()\n};\n\nif (\n    Number.isNaN(measurement.raw0) ||\n    Number.isNaN(measurement.raw1) ||\n    Number.isNaN(measurement.raw2) ||\n    Number.isNaN(measurement.raw3) ||\n    Number.isNaN(measurement.raw4)\n) {\n    node.warn('One or more raw values are not numeric');\n    return null;\n}\n\nflow.set('latestMeasurement', measurement);\nmsg.payload = measurement;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 620,
+        "y": 560,
+        "wires": [
+            [
+                "debug_parsed_measurement_v1",
+                "fn_selected_board_status_v1",
+                "fn_raw0_to_gauge",
+                "fn_raw0_scaled_boardA_v1",
+                "fn_raw1_scaled_boardA_v1",
+                "fn_raw2_scaled_boardA_v1",
+                "fn_raw3_scaled_boardA_v1",
+                "fn_raw4_scaled_boardA_v1"
+            ]
+        ]
+    },
+    {
+        "id": "fn_selected_board_status_v1",
+        "type": "function",
+        "z": "tab_restart_full_v1",
+        "name": "selected_board_status_text",
+        "func": "const selected = flow.get('selectedBoard') || '-';\nconst latest = flow.get('latestMeasurement');\n\nif (!latest) {\n    msg.payload = `Επιλεγμένη πλακέτα: ${selected}`;\n    return msg;\n}\n\nmsg.payload = `Επιλεγμένη πλακέτα: ${selected} | Τελευταία μέτρηση από: ${latest.board}`;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1120,
+        "y": 380,
+        "wires": [
+            [
+                "txt_selected_board_v1"
+            ]
+        ]
+    },
+    {
+        "id": "debug_serial_raw_v1",
+        "type": "debug",
+        "z": "tab_restart_full_v1",
+        "name": "debug serial raw",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 180,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "debug_parsed_measurement_v1",
+        "type": "debug",
+        "z": "tab_restart_full_v1",
+        "name": "debug parsed measurement",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "payload.board",
+        "statusType": "msg",
+        "x": 1000,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "debug_gauge_raw0_v1",
+        "type": "debug",
+        "z": "tab_restart_full_v1",
+        "name": "debug raw0 live value",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "payload",
+        "statusType": "msg",
+        "x": 1700,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "fn_raw0_to_gauge",
+        "type": "function",
+        "z": "tab_restart_full_v1",
+        "name": "raw0_to_gauge",
+        "func": "const m = msg.payload;\n\nif (!m || typeof m !== 'object') {\n    return null;\n}\n\nif (m.raw0 === undefined || m.raw0 === null) {\n    return null;\n}\n\nmsg.payload = Number(m.raw0);\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1020,
+        "y": 480,
+        "wires": [
+            [
+                "debug_gauge_raw0"
+            ]
+        ]
+    },
+    {
+        "id": "debug_gauge_raw0",
+        "type": "debug",
+        "z": "tab_restart_full_v1",
+        "name": "debug gauge raw0",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "payload",
+        "statusType": "msg",
+        "x": 1350,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "fn_raw0_scaled_boardA_v1",
+        "type": "function",
+        "z": "tab_restart_full_v1",
+        "name": "raw0_scaled_boardA",
+        "func": "const m = msg.payload;\nconst selectedBoard = flow.get('selectedBoard');\n\nif (!m || typeof m !== 'object') return null;\nif (m.raw0 === undefined || m.raw0 === null) return null;\n\nconst raw0 = Number(m.raw0);\nif (Number.isNaN(raw0)) return null;\n\nif (selectedBoard === 'A') {\n    const vTotal = (raw0 * 25) / 1023;\n    msg.payload = Number(vTotal.toFixed(2));\n    return msg;\n}\n\nmsg.payload = raw0;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1060,
+        "y": 520,
+        "wires": [
+            [
+                "ui_gauge_raw0_boardA_v1"
+            ]
+        ]
+    },
+    {
+        "id": "ui_gauge_raw0_boardA_v1",
+        "type": "ui-gauge",
+        "z": "tab_restart_full_v1",
+        "name": "Gauge BoardA Vtotal",
+        "group": "ui_group_live_measurements_v1",
+        "order": 1,
+        "value": "payload",
+        "valueType": "msg",
+        "width": "4",
+        "height": "4",
+        "gtype": "gauge-half",
+        "gstyle": "needle",
+        "title": "Συνολική Τάση",
+        "alwaysShowTitle": false,
+        "floatingTitlePosition": "top-left",
+        "units": "V",
+        "icon": "",
+        "prefix": "",
+        "suffix": "",
+        "segments": [
+            {
+                "from": "0",
+                "color": "#4da3ff",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "8",
+                "color": "#1f78ff",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "16",
+                "color": "#0b57d0",
+                "text": "",
+                "textType": "label"
+            }
+        ],
+        "min": 0,
+        "max": "25",
+        "sizeThickness": 16,
+        "sizeGap": 4,
+        "sizeKeyThickness": 8,
+        "styleRounded": true,
+        "styleGlow": false,
+        "className": "",
+        "x": 1370,
+        "y": 520,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "fn_raw1_scaled_boardA_v1",
+        "type": "function",
+        "z": "tab_restart_full_v1",
+        "name": "raw1_scaled_boardA",
+        "func": "const m = msg.payload;\nconst selectedBoard = flow.get('selectedBoard');\n\nif (!m || typeof m !== 'object') return null;\nif (m.raw0 === undefined || m.raw0 === null) return null;\nif (m.raw1 === undefined || m.raw1 === null) return null;\n\nconst raw0 = Number(m.raw0);\nconst raw1 = Number(m.raw1);\nif (Number.isNaN(raw0) || Number.isNaN(raw1)) return null;\n\nif (selectedBoard === 'A') {\n    const diff = raw0 - raw1;\n    const volts = (diff * 25) / 1023;\n    msg.payload = Number(volts.toFixed(2));\n    return msg;\n}\n\nmsg.payload = raw1;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1040,
+        "y": 580,
+        "wires": [
+            [
+                "ui_gauge_raw1_boardA_v1"
+            ]
+        ]
+    },
+    {
+        "id": "ui_gauge_raw1_boardA_v1",
+        "type": "ui-gauge",
+        "z": "tab_restart_full_v1",
+        "name": "Gauge BoardA V2",
+        "group": "ui_group_live_measurements_v1",
+        "order": 2,
+        "value": "payload",
+        "valueType": "msg",
+        "width": "4",
+        "height": "4",
+        "gtype": "gauge-half",
+        "gstyle": "needle",
+        "title": "Τάση 2",
+        "alwaysShowTitle": false,
+        "floatingTitlePosition": "top-left",
+        "units": "V",
+        "icon": "",
+        "prefix": "",
+        "suffix": "",
+        "segments": [
+            {
+                "from": "0",
+                "color": "#4da3ff",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "8",
+                "color": "#1f78ff",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "16",
+                "color": "#0b57d0",
+                "text": "",
+                "textType": "label"
+            }
+        ],
+        "min": 0,
+        "max": "25",
+        "sizeThickness": 16,
+        "sizeGap": 4,
+        "sizeKeyThickness": 8,
+        "styleRounded": true,
+        "styleGlow": false,
+        "className": "",
+        "x": 1340,
+        "y": 580,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "fn_raw2_scaled_boardA_v1",
+        "type": "function",
+        "z": "tab_restart_full_v1",
+        "name": "raw2_scaled_boardA",
+        "func": "const m = msg.payload;\nconst selectedBoard = flow.get('selectedBoard');\n\nif (!m || typeof m !== 'object') return null;\nif (m.raw1 === undefined || m.raw1 === null) return null;\nif (m.raw2 === undefined || m.raw2 === null) return null;\n\nconst raw1 = Number(m.raw1);\nconst raw2 = Number(m.raw2);\nif (Number.isNaN(raw1) || Number.isNaN(raw2)) return null;\n\nif (selectedBoard === 'A') {\n    const diff = raw1 - raw2;\n    const volts = (diff * 25) / 1023;\n    msg.payload = Number(volts.toFixed(2));\n    return msg;\n}\n\nmsg.payload = raw2;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1050,
+        "y": 640,
+        "wires": [
+            [
+                "ui_gauge_raw2_boardA_v1"
+            ]
+        ]
+    },
+    {
+        "id": "fn_raw3_scaled_boardA_v1",
+        "type": "function",
+        "z": "tab_restart_full_v1",
+        "name": "raw3_scaled_boardA",
+        "func": "const m = msg.payload;\nconst selectedBoard = flow.get('selectedBoard');\n\nif (!m || typeof m !== 'object') return null;\nif (m.raw2 === undefined || m.raw2 === null) return null;\n\nconst raw2 = Number(m.raw2);\nif (Number.isNaN(raw2)) return null;\n\nif (selectedBoard === 'A') {\n    const volts = (raw2 * 25) / 1023;\n    msg.payload = Number(volts.toFixed(2));\n    return msg;\n}\n\nmsg.payload = raw2;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1050,
+        "y": 700,
+        "wires": [
+            [
+                "ui_gauge_raw3_boardA_v1"
+            ]
+        ]
+    },
+    {
+        "id": "ui_gauge_raw2_boardA_v1",
+        "type": "ui-gauge",
+        "z": "tab_restart_full_v1",
+        "name": "Gauge BoardA V3",
+        "group": "ui_group_live_measurements_v1",
+        "order": 3,
+        "value": "payload",
+        "valueType": "msg",
+        "width": "4",
+        "height": "4",
+        "gtype": "gauge-half",
+        "gstyle": "needle",
+        "title": "Τάση 3",
+        "alwaysShowTitle": false,
+        "floatingTitlePosition": "top-left",
+        "units": "V",
+        "icon": "",
+        "prefix": "",
+        "suffix": "",
+        "segments": [
+            {
+                "from": "0",
+                "color": "#4da3ff",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "8",
+                "color": "#1f78ff",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "16",
+                "color": "#0b57d0",
+                "text": "",
+                "textType": "label"
+            }
+        ],
+        "min": 0,
+        "max": "25",
+        "sizeThickness": 16,
+        "sizeGap": 4,
+        "sizeKeyThickness": 8,
+        "styleRounded": true,
+        "styleGlow": false,
+        "className": "",
+        "x": 1350,
+        "y": 640,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ui_gauge_raw3_boardA_v1",
+        "type": "ui-gauge",
+        "z": "tab_restart_full_v1",
+        "name": "Gauge BoardA V4",
+        "group": "ui_group_live_measurements_v1",
+        "order": 4,
+        "value": "payload",
+        "valueType": "msg",
+        "width": "4",
+        "height": "4",
+        "gtype": "gauge-half",
+        "gstyle": "needle",
+        "title": "Τάση 4",
+        "alwaysShowTitle": false,
+        "floatingTitlePosition": "top-left",
+        "units": "V",
+        "icon": "",
+        "prefix": "",
+        "suffix": "",
+        "segments": [
+            {
+                "from": "0",
+                "color": "#4da3ff",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "8",
+                "color": "#1f78ff",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "16",
+                "color": "#0b57d0",
+                "text": "",
+                "textType": "label"
+            }
+        ],
+        "min": 0,
+        "max": "25",
+        "sizeThickness": 16,
+        "sizeGap": 4,
+        "sizeKeyThickness": 8,
+        "styleRounded": true,
+        "styleGlow": false,
+        "className": "",
+        "x": 1350,
+        "y": 700,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "fn_raw4_scaled_boardA_v1",
+        "type": "function",
+        "z": "tab_restart_full_v1",
+        "name": "raw4_scaled_boardA_ammeter",
+        "func": "const m = msg.payload;\nconst selectedBoard = flow.get('selectedBoard');\n\nif (!m || typeof m !== 'object') return null;\nif (m.raw4 === undefined || m.raw4 === null) return null;\n\nconst raw4 = Number(m.raw4);\nif (Number.isNaN(raw4)) return null;\n\nif (selectedBoard === 'A') {\n    const amps = ((raw4 - 511.5) / 511.5) * 5;\n    msg.payload = Number(amps.toFixed(2));\n    return msg;\n}\n\nmsg.payload = raw4;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1090,
+        "y": 760,
+        "wires": [
+            [
+                "ui_gauge_raw4_boardA_v1"
+            ]
+        ]
+    },
+    {
+        "id": "ui_gauge_raw4_boardA_v1",
+        "type": "ui-gauge",
+        "z": "tab_restart_full_v1",
+        "name": "Gauge BoardA I1",
+        "group": "ui_group_live_measurements_v1",
+        "order": 5,
+        "value": "payload",
+        "valueType": "msg",
+        "width": "4",
+        "height": "4",
+        "gtype": "gauge-half",
+        "gstyle": "needle",
+        "title": "Ρεύμα",
+        "alwaysShowTitle": false,
+        "floatingTitlePosition": "top-left",
+        "units": "A",
+        "icon": "",
+        "prefix": "",
+        "suffix": "",
+        "segments": [
+            {
+                "from": "-5",
+                "color": "#33b864",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "0",
+                "color": "#1e8e3e",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "3.5",
+                "color": "#0f6b2b",
+                "text": "",
+                "textType": "label"
+            }
+        ],
+        "min": "-5",
+        "max": "5",
+        "sizeThickness": 16,
+        "sizeGap": 4,
+        "sizeKeyThickness": 8,
+        "styleRounded": true,
+        "styleGlow": false,
+        "className": "",
+        "x": 1370,
+        "y": 760,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "btn_save_csv_v1",
+        "type": "ui-button",
+        "z": "tab_restart_full_v1",
+        "group": "ccc0eaae2821760a",
+        "name": "Save CSV",
+        "label": "Καταχώρηση CSV",
+        "order": 1,
+        "width": "3",
+        "height": "1",
+        "emulateClick": false,
+        "className": "",
+        "icon": "content-save",
+        "iconPosition": "left",
+        "payload": "save",
+        "payloadType": "str",
+        "topic": "save-csv",
+        "topicType": "str",
+        "buttonColor": "",
+        "textColor": "",
+        "iconColor": "",
+        "enableClick": true,
+        "enablePointerdown": false,
+        "pointerdownPayload": "",
+        "pointerdownPayloadType": "str",
+        "enablePointerup": false,
+        "pointerupPayload": "",
+        "pointerupPayloadType": "str",
+        "x": 150,
+        "y": 900,
+        "wires": [
+            [
+                "fn_prepare_csv_row_v2"
+            ]
+        ]
+    },
+    {
+        "id": "btn_refresh_table_v1",
+        "type": "ui-button",
+        "z": "tab_restart_full_v1",
+        "group": "ccc0eaae2821760a",
+        "name": "Refresh Table",
+        "label": "Ανανέωση Πίνακα",
+        "order": 2,
+        "width": "3",
+        "height": "1",
+        "emulateClick": false,
+        "className": "",
+        "icon": "table-refresh",
+        "iconPosition": "left",
+        "payload": "refresh",
+        "payloadType": "str",
+        "topic": "refresh-table",
+        "topicType": "str",
+        "buttonColor": "",
+        "textColor": "",
+        "iconColor": "",
+        "enableClick": true,
+        "enablePointerdown": false,
+        "pointerdownPayload": "",
+        "pointerdownPayloadType": "str",
+        "enablePointerup": false,
+        "pointerupPayload": "",
+        "pointerupPayloadType": "str",
+        "x": 160,
+        "y": 980,
+        "wires": [
+            [
+                "file_in_csv_v1"
+            ]
+        ]
+    },
+    {
+        "id": "fn_prepare_csv_row_v2",
+        "type": "function",
+        "z": "tab_restart_full_v1",
+        "name": "prepare_csv_row_scaled_only",
+        "func": "const m = flow.get('latestMeasurement');\nconst selectedBoard = flow.get('selectedBoard') || '-';\n\nif (!m) {\n    return [null, { payload: 'Δεν υπάρχει έγκυρη μέτρηση για αποθήκευση.' }];\n}\n\nconst raw0 = Number(m.raw0);\nconst raw1 = Number(m.raw1);\nconst raw2 = Number(m.raw2);\nconst raw4 = Number(m.raw4);\n\nconst ts = new Date().toISOString();\n\nlet v_total = '';\nlet v2 = '';\nlet v3 = '';\nlet v4 = '';\nlet i1 = '';\n\nif (selectedBoard === 'A') {\n    v_total = ((raw0 * 25) / 1023).toFixed(2);\n    v2 = (((raw0 - raw1) * 25) / 1023).toFixed(2);\n    v3 = (((raw1 - raw2) * 25) / 1023).toFixed(2);\n    v4 = ((raw2 * 25) / 1023).toFixed(2);\n    i1 = ((((raw4 - 511.5) / 511.5) * 5)).toFixed(2);\n}\n\nconst rowObj = {\n    timestamp: ts,\n    board: selectedBoard,\n    v_total: v_total,\n    v2: v2,\n    v3: v3,\n    v4: v4,\n    i1: i1\n};\n\nconst header = 'timestamp,board,v_total,v2,v3,v4,i1\\n';\nconst row = [\n    rowObj.timestamp,\n    rowObj.board,\n    rowObj.v_total,\n    rowObj.v2,\n    rowObj.v3,\n    rowObj.v4,\n    rowObj.i1\n].join(',') + '\\n';\n\nmsg.filename = '/home/pi/data/lab_measurements.csv';\nmsg.csv_header = header;\nmsg.csv_row = row;\nmsg.rowObj = rowObj;\nreturn [msg, null];",
+        "outputs": 2,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 530,
+        "y": 920,
+        "wires": [
+            [
+                "file_check_csv_v1"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "file_check_csv_v1",
+        "type": "file in",
+        "z": "tab_restart_full_v1",
+        "name": "check existing csv",
+        "filename": "filename",
+        "filenameType": "msg",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": true,
+        "encoding": "none",
+        "allProps": false,
+        "x": 810,
+        "y": 920,
+        "wires": [
+            [
+                "fn_write_csv_with_header_v1"
+            ]
+        ]
+    },
+    {
+        "id": "fn_write_csv_with_header_v1",
+        "type": "function",
+        "z": "tab_restart_full_v1",
+        "name": "write_csv_with_header_if_needed",
+        "func": "const hasContent = typeof msg.payload === 'string' && msg.payload.length > 0;\nconst header = msg.csv_header || 'timestamp,board,v_total,v2,v3,v4,i1\\n';\nconst row = msg.csv_row || '';\n\nif (hasContent) {\n    msg.payload = row;\n} else {\n    msg.payload = header + row;\n}\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1100,
+        "y": 920,
+        "wires": [
+            [
+                "file_append_csv_v2"
+            ]
+        ]
+    },
+    {
+        "id": "file_append_csv_v2",
+        "type": "file",
+        "z": "tab_restart_full_v1",
+        "name": "append scaled csv",
+        "filename": "filename",
+        "filenameType": "msg",
+        "appendNewline": false,
+        "createDir": false,
+        "overwriteFile": "false",
+        "encoding": "none",
+        "x": 1370,
+        "y": 920,
+        "wires": [
+            [
+                "fn_csv_success_status_v2",
+                "file_in_csv_v1"
+            ]
+        ]
+    },
+    {
+        "id": "fn_csv_success_status_v2",
+        "type": "function",
+        "z": "tab_restart_full_v1",
+        "name": "csv_success_status_v2",
+        "func": "msg.payload = 'Η μέτρηση αποθηκεύτηκε στο CSV και ο πίνακας ανανεώθηκε.';\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1670,
+        "y": 920,
+        "wires": [
+            [
+                "aed44af6e2b775dc"
+            ]
+        ]
+    },
+    {
+        "id": "file_in_csv_v1",
+        "type": "file in",
+        "z": "tab_restart_full_v1",
+        "name": "read csv for table",
+        "filename": "/home/pi/data/lab_measurements.csv",
+        "filenameType": "str",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 530,
+        "y": 980,
+        "wires": [
+            [
+                "fn_csv_to_table_v1"
+            ]
+        ]
+    },
+    {
+        "id": "fn_csv_to_table_v1",
+        "type": "function",
+        "z": "tab_restart_full_v1",
+        "name": "csv_to_table_rows",
+        "func": "const text = (msg.payload || '').trim();\n\nif (!text) {\n    msg.payload = [];\n    return msg;\n}\n\nconst lines = text.split('\\n').filter(Boolean);\n\nif (lines.length < 2) {\n    msg.payload = [];\n    return msg;\n}\n\nconst headers = lines[0].split(',');\n\nconst rows = lines.slice(1).map(line => {\n    const values = line.split(',');\n    const obj = {};\n    headers.forEach((h, i) => {\n        obj[h] = values[i] ?? '';\n    });\n    return obj;\n});\n\nmsg.payload = rows.slice(-10).reverse();\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 810,
+        "y": 980,
+        "wires": [
+            [
+                "ui_table_history_v1"
+            ]
+        ]
+    },
+    {
+        "id": "2ffa28292c608782",
+        "type": "ui-button",
+        "z": "tab_restart_full_v1",
+        "group": "",
+        "name": "Save CSV",
+        "label": "Καταχώρηση CSV",
+        "order": 5,
+        "width": "4",
+        "height": "1",
+        "emulateClick": false,
+        "className": "",
+        "icon": "content-save",
+        "iconPosition": "left",
+        "payload": "save",
+        "payloadType": "str",
+        "topic": "save-csv",
+        "buttonColor": "",
+        "textColor": "",
+        "enableClick": true,
+        "x": 150,
+        "y": 820,
+        "wires": [
+            [
+                "5cd21368ea447e2e"
+            ]
+        ]
+    },
+    {
+        "id": "8ee10ddb299bde13",
+        "type": "ui-text",
+        "z": "tab_restart_full_v1",
+        "group": "",
+        "order": 3,
+        "width": "8",
+        "height": "1",
+        "name": "CSV Status",
+        "label": "Κατάσταση",
+        "format": "{{msg.payload}}",
+        "layout": "row-left",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "",
+        "className": "",
+        "x": 1430,
+        "y": 860,
+        "wires": []
+    },
+    {
+        "id": "5cd21368ea447e2e",
+        "type": "function",
+        "z": "tab_restart_full_v1",
+        "name": "prepare_csv_row",
+        "func": "const m = flow.get('latestMeasurement');\nconst selectedBoard = flow.get('selectedBoard') || '-';\n\nif (!m) {\n    return [null, { payload: 'Δεν υπάρχει έγκυρη μέτρηση για αποθήκευση.' }];\n}\n\nconst raw0 = Number(m.raw0);\nconst raw1 = Number(m.raw1);\nconst raw2 = Number(m.raw2);\nconst raw3 = Number(m.raw3);\nconst raw4 = Number(m.raw4);\n\nconst ts = new Date().toISOString();\n\nlet v_total = '';\nlet v2 = '';\nlet v3 = '';\nlet v4 = '';\nlet i1 = '';\n\nif (selectedBoard === 'A') {\n    v_total = ((raw0 * 25) / 1023).toFixed(2);\n    v2 = (((raw0 - raw1) * 25) / 1023).toFixed(2);\n    v3 = (((raw1 - raw2) * 25) / 1023).toFixed(2);\n    v4 = ((raw2 * 25) / 1023).toFixed(2);\n    i1 = ((((raw4 - 511.5) / 511.5) * 5)).toFixed(2);\n}\n\nconst row = [\n    ts,\n    selectedBoard,\n    raw0,\n    raw1,\n    raw2,\n    raw3,\n    raw4,\n    v_total,\n    v2,\n    v3,\n    v4,\n    i1\n].join(',') + '\\n';\n\nconst header = 'timestamp,board,raw0,raw1,raw2,raw3,raw4,v_total,v2,v3,v4,i1\\n';\n\nmsg.filename = '/home/pi/data/lab_measurements.csv';\nmsg.payload = row;\nmsg.header = header;\nreturn [msg, null];",
+        "outputs": 2,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 410,
+        "y": 840,
+        "wires": [
+            [
+                "f6928a7a7bb01aad"
+            ],
+            [
+                "8ee10ddb299bde13"
+            ]
+        ]
+    },
+    {
+        "id": "f6928a7a7bb01aad",
+        "type": "file",
+        "z": "tab_restart_full_v1",
+        "name": "append csv",
+        "filename": "filename",
+        "filenameType": "msg",
+        "appendNewline": false,
+        "createDir": true,
+        "overwriteFile": "false",
+        "encoding": "none",
+        "x": 690,
+        "y": 800,
+        "wires": [
+            [
+                "115504fa598ba194"
+            ]
+        ]
+    },
+    {
+        "id": "115504fa598ba194",
+        "type": "function",
+        "z": "tab_restart_full_v1",
+        "name": "csv_success_status",
+        "func": "msg.payload = 'Η μέτρηση αποθηκεύτηκε στο CSV.';\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1020,
+        "y": 820,
+        "wires": [
+            [
+                "8ee10ddb299bde13",
+                "debug_gauge_raw0_v1"
+            ]
+        ]
+    },
+    {
+        "id": "aed44af6e2b775dc",
+        "type": "ui-text",
+        "z": "tab_restart_full_v1",
+        "group": "ccc0eaae2821760a",
+        "order": 3,
+        "width": "6",
+        "height": "1",
+        "name": "CSV Status",
+        "label": "Κατάσταση",
+        "format": "{{msg.payload}}",
+        "layout": "row-left",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "wrapText": false,
+        "className": "",
+        "value": "payload",
+        "valueType": "msg",
+        "x": 1910,
+        "y": 920,
+        "wires": []
+    },
+    {
+        "id": "ui_table_history_v1",
+        "type": "ui-table",
+        "z": "tab_restart_full_v1",
+        "group": "ui_group_history_v1",
+        "name": "CSV History",
+        "label": "",
+        "order": 1,
+        "width": "0",
+        "height": "0",
+        "maxrows": "",
+        "autocols": true,
+        "showSearch": false,
+        "deselect": true,
+        "selectionType": "none",
+        "columns": [
+            {
+                "title": "",
+                "key": "",
+                "keyType": "key",
+                "type": "text",
+                "width": "",
+                "align": "start"
+            }
+        ],
+        "mobileBreakpoint": "sm",
+        "mobileBreakpointType": "defaults",
+        "action": "replace",
+        "className": "",
+        "x": 1170,
+        "y": 980,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "btn_delete_last_csv_v1",
+        "type": "ui-button",
+        "z": "tab_restart_full_v1",
+        "group": "ccc0eaae2821760a",
+        "name": "Delete Last CSV Row",
+        "label": "Διαγραφή τελευταίας μέτρησης",
+        "order": 4,
+        "width": "4",
+        "height": "1",
+        "emulateClick": false,
+        "className": "",
+        "icon": "delete",
+        "iconPosition": "left",
+        "payload": "delete-last",
+        "payloadType": "str",
+        "topic": "delete-last-row",
+        "topicType": "str",
+        "buttonColor": "",
+        "textColor": "",
+        "iconColor": "",
+        "enableClick": true,
+        "enablePointerdown": false,
+        "pointerdownPayload": "",
+        "pointerdownPayloadType": "str",
+        "enablePointerup": false,
+        "pointerupPayload": "",
+        "pointerupPayloadType": "str",
+        "x": 180,
+        "y": 1060,
+        "wires": [
+            [
+                "fn_set_csv_filename_delete_v1"
+            ]
+        ]
+    },
+    {
+        "id": "fn_set_csv_filename_delete_v1",
+        "type": "function",
+        "z": "tab_restart_full_v1",
+        "name": "set_csv_filename_for_delete",
+        "func": "msg.filename = '/home/pi/data/lab_measurements.csv';\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 520,
+        "y": 1060,
+        "wires": [
+            [
+                "file_read_csv_for_delete_v1"
+            ]
+        ]
+    },
+    {
+        "id": "file_read_csv_for_delete_v1",
+        "type": "file in",
+        "z": "tab_restart_full_v1",
+        "name": "read csv for delete",
+        "filename": "filename",
+        "filenameType": "msg",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": true,
+        "encoding": "none",
+        "allProps": false,
+        "x": 850,
+        "y": 1060,
+        "wires": [
+            [
+                "fn_delete_last_csv_row_v1"
+            ]
+        ]
+    },
+    {
+        "id": "fn_delete_last_csv_row_v1",
+        "type": "function",
+        "z": "tab_restart_full_v1",
+        "name": "delete_last_csv_row",
+        "func": "const text = (msg.payload || '').trim();\nconst filename = msg.filename || '/home/pi/data/lab_measurements.csv';\n\nif (!text) {\n    return [null, { payload: 'Το CSV είναι κενό.' }];\n}\n\nconst lines = text.split('\\n').filter(line => line.trim() !== '');\n\nif (lines.length === 0) {\n    return [null, { payload: 'Το CSV είναι κενό.' }];\n}\n\nif (lines.length === 1) {\n    msg.filename = filename;\n    msg.payload = lines[0] + '\\n';\n    msg.statusText = 'Δεν υπάρχει μέτρηση για διαγραφή.';\n    return [msg, null];\n}\n\nconst header = lines[0];\nconst dataRows = lines.slice(1);\ndataRows.pop();\n\nmsg.filename = filename;\nmsg.payload = [header, ...dataRows].join('\\n') + '\\n';\nmsg.statusText = 'Η τελευταία μέτρηση διαγράφηκε.';\nreturn [msg, null];",
+        "outputs": 2,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1100,
+        "y": 1060,
+        "wires": [
+            [
+                "file_overwrite_csv_after_delete_v1"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "file_overwrite_csv_after_delete_v1",
+        "type": "file",
+        "z": "tab_restart_full_v1",
+        "name": "overwrite csv after delete",
+        "filename": "filename",
+        "filenameType": "msg",
+        "appendNewline": false,
+        "createDir": false,
+        "overwriteFile": "true",
+        "encoding": "none",
+        "x": 1370,
+        "y": 1040,
+        "wires": [
+            [
+                "fn_delete_status_v1",
+                "file_in_csv_v1"
+            ]
+        ]
+    },
+    {
+        "id": "fn_delete_status_v1",
+        "type": "function",
+        "z": "tab_restart_full_v1",
+        "name": "delete_status_text",
+        "func": "msg.payload = msg.statusText || 'Ο πίνακας ενημερώθηκε μετά τη διαγραφή.';\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1650,
+        "y": 1040,
+        "wires": [
+            [
+                "aed44af6e2b775dc"
+            ]
+        ]
+    },
+    {
+        "id": "btn_clear_csv_v1",
+        "type": "ui-button",
+        "z": "tab_restart_full_v1",
+        "group": "ccc0eaae2821760a",
+        "name": "Clear CSV",
+        "label": "Καθαρισμός CSV",
+        "order": 5,
+        "width": "3",
+        "height": "1",
+        "emulateClick": false,
+        "className": "",
+        "icon": "broom",
+        "iconPosition": "left",
+        "payload": "clear-csv",
+        "payloadType": "str",
+        "topic": "clear-csv",
+        "topicType": "str",
+        "buttonColor": "",
+        "textColor": "",
+        "iconColor": "",
+        "enableClick": true,
+        "enablePointerdown": false,
+        "pointerdownPayload": "",
+        "pointerdownPayloadType": "str",
+        "enablePointerup": false,
+        "pointerupPayload": "",
+        "pointerupPayloadType": "str",
+        "x": 150,
+        "y": 1120,
+        "wires": [
+            [
+                "fn_prepare_clear_csv_v1"
+            ]
+        ]
+    },
+    {
+        "id": "fn_prepare_clear_csv_v1",
+        "type": "function",
+        "z": "tab_restart_full_v1",
+        "name": "prepare_clear_csv",
+        "func": "msg.filename = '/home/pi/data/lab_measurements.csv';\nmsg.payload = 'timestamp,board,v_total,v2,v3,v4,i1\\n';\nmsg.statusText = 'Το CSV καθαρίστηκε.';\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 1120,
+        "wires": [
+            [
+                "file_clear_csv_v1"
+            ]
+        ]
+    },
+    {
+        "id": "file_clear_csv_v1",
+        "type": "file",
+        "z": "tab_restart_full_v1",
+        "name": "clear csv keep header",
+        "filename": "filename",
+        "filenameType": "msg",
+        "appendNewline": false,
+        "createDir": false,
+        "overwriteFile": "true",
+        "encoding": "none",
+        "x": 640,
+        "y": 1120,
+        "wires": [
+            [
+                "fn_clear_status_v1",
+                "file_in_csv_v1"
+            ]
+        ]
+    },
+    {
+        "id": "fn_clear_status_v1",
+        "type": "function",
+        "z": "tab_restart_full_v1",
+        "name": "clear_status_text",
+        "func": "msg.payload = msg.statusText || 'Το CSV καθαρίστηκε και ο πίνακας ανανεώθηκε.';\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 870,
+        "y": 1120,
+        "wires": [
+            [
+                "aed44af6e2b775dc"
+            ]
+        ]
+    },
+    {
+        "id": "btn_upload_moodle_v1",
+        "type": "ui-button",
+        "z": "tab_restart_full_v1",
+        "group": "ccc0eaae2821760a",
+        "name": "Upload MoodleBox",
+        "label": "Αποστολή στο Moodle",
+        "order": 6,
+        "width": "3",
+        "height": "1",
+        "emulateClick": false,
+        "className": "",
+        "icon": "upload",
+        "iconPosition": "left",
+        "payload": "upload-moodle",
+        "payloadType": "str",
+        "topic": "upload-moodle",
+        "topicType": "str",
+        "buttonColor": "",
+        "textColor": "",
+        "iconColor": "",
+        "enableClick": true,
+        "enablePointerdown": false,
+        "pointerdownPayload": "",
+        "pointerdownPayloadType": "str",
+        "enablePointerup": false,
+        "pointerupPayload": "",
+        "pointerupPayloadType": "str",
+        "x": 170,
+        "y": 1160,
+        "wires": [
+            [
+                "fn_prepare_moodle_upload_v1"
+            ]
+        ]
+    },
+    {
+        "id": "fn_prepare_moodle_upload_v1",
+        "type": "function",
+        "z": "tab_restart_full_v1",
+        "name": "prepare_moodle_upload",
+        "func": "const csvFile = '/home/pi/data/lab_measurements.csv';\nconst moodleBase = 'http://moodlebox.home'.replace(/\\/+$/, '');\nconst token = '09dc1ea6e5139e6ac9ba6fc5bf424b1b';\n\nmsg.filename = csvFile;\nmsg.uploadUrl = `${moodleBase}/webservice/upload.php?token=${token}&moodlewsrestformat=json`;\nmsg.payload = `curl -s -X POST --form \"file_1=@${csvFile};type=text/csv\" \"${msg.uploadUrl}\"`;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 530,
+        "y": 1180,
+        "wires": [
+            [
+                "exec_upload_moodle_v1"
+            ]
+        ]
+    },
+    {
+        "id": "exec_upload_moodle_v1",
+        "type": "exec",
+        "z": "tab_restart_full_v1",
+        "command": "",
+        "addpay": "payload",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "exec curl moodle upload",
+        "x": 870,
+        "y": 1200,
+        "wires": [
+            [
+                "fn_parse_moodle_upload_result_v1"
+            ],
+            [
+                "debug_moodle_upload_stderr_v1"
+            ],
+            [
+                "debug_moodle_upload_rc_v1"
+            ]
+        ]
+    },
+    {
+        "id": "fn_parse_moodle_upload_result_v1",
+        "type": "function",
+        "z": "tab_restart_full_v1",
+        "name": "parse_moodle_upload_result",
+        "func": "const out = String(msg.payload || '').trim();\n\nif (!out) {\n    msg.payload = 'Το upload εκτελέστηκε αλλά δεν επέστρεψε απάντηση.';\n    return msg;\n}\n\ntry {\n    const data = JSON.parse(out);\n    if (data.error) {\n        msg.payload = `Σφάλμα Moodle upload: ${data.error}`;\n        return msg;\n    }\n    msg.payload = 'Το CSV ανέβηκε επιτυχώς στο MoodleBox.';\n    msg.moodleResponse = data;\n    return msg;\n} catch (e) {\n    msg.payload = `Απάντηση upload: ${out}`;\n    return msg;\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1180,
+        "y": 1140,
+        "wires": [
+            [
+                "debug_moodle_upload_out_v1"
+            ]
+        ]
+    },
+    {
+        "id": "debug_moodle_upload_out_v1",
+        "type": "debug",
+        "z": "tab_restart_full_v1",
+        "name": "debug moodle upload out",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 1730,
+        "y": 1140,
+        "wires": []
+    },
+    {
+        "id": "debug_moodle_upload_stderr_v1",
+        "type": "debug",
+        "z": "tab_restart_full_v1",
+        "name": "debug moodle upload stderr",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1640,
+        "y": 1180,
+        "wires": []
+    },
+    {
+        "id": "debug_moodle_upload_rc_v1",
+        "type": "debug",
+        "z": "tab_restart_full_v1",
+        "name": "debug moodle upload rc",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "payload",
+        "statusType": "msg",
+        "x": 1630,
+        "y": 1220,
+        "wires": []
+    },
+    {
+        "id": "ui_group_select_board_v1",
+        "type": "ui-group",
+        "name": "Select Board",
+        "page": "ui_page_board_selection_v1",
+        "width": "6",
+        "height": "1",
+        "order": 1,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false"
+    },
+    {
+        "id": "ui_group_system_status_v1",
+        "type": "ui-group",
+        "name": "System Status",
+        "page": "ui_page_lab_dashboard_v1",
+        "width": "12",
+        "height": "1",
+        "order": 1,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false"
+    },
+    {
+        "id": "ui_base_1",
+        "type": "ui-base",
+        "name": "Dashboard",
+        "path": "/dashboard",
+        "appIcon": "",
+        "includeClientData": true,
+        "acceptsClientConfig": [
+            "ui-control"
+        ],
+        "showPathInSidebar": true,
+        "headerContent": "page",
+        "navigationStyle": "default",
+        "titleBarStyle": "default",
+        "showReconnectNotification": true,
+        "notificationDisplayTime": 5,
+        "showDisconnectNotification": true,
+        "allowInstall": true
+    },
+    {
+        "id": "f6f5b65e83687d3c",
+        "type": "serial-port",
+        "name": "",
+        "serialport": "/dev/ttyUSB0",
+        "serialbaud": "115200",
+        "databits": 8,
+        "parity": "none",
+        "stopbits": 1,
+        "waitfor": "",
+        "dtr": "none",
+        "rts": "none",
+        "cts": "none",
+        "dsr": "none",
+        "newline": "\\n",
+        "bin": "false",
+        "out": "char",
+        "addchar": "",
+        "responsetimeout": 10000
+    },
+    {
+        "id": "ui_group_live_measurements_v1",
+        "type": "ui-group",
+        "name": "Live Measurements",
+        "page": "ui_page_lab_dashboard_v1",
+        "width": "12",
+        "height": "1",
+        "order": 2,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "ccc0eaae2821760a",
+        "type": "ui-group",
+        "name": "Action",
+        "page": "ui_page_lab_dashboard_v1",
+        "width": "12",
+        "height": 1,
+        "order": 3,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "ui_group_history_v1",
+        "type": "ui-group",
+        "name": "History",
+        "page": "ui_page_lab_dashboard_v1",
+        "width": "12",
+        "height": "8",
+        "order": 4,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "ui_page_board_selection_v1",
+        "type": "ui-page",
+        "name": "Board Selection",
+        "ui": "ui_base_1",
+        "path": "/board-selection",
+        "icon": "gesture-tap-button",
+        "layout": "grid",
+        "theme": "default",
+        "breakpoints": [
+            {
+                "name": "Default",
+                "px": 0,
+                "cols": 6
+            }
+        ],
+        "order": 2,
+        "className": "",
+        "visible": "true",
+        "disabled": "false"
+    },
+    {
+        "id": "ui_page_lab_dashboard_v1",
+        "type": "ui-page",
+        "name": "Lab Dashboard",
+        "ui": "ui_base_1",
+        "path": "/lab-dashboard",
+        "icon": "view-dashboard",
+        "layout": "grid",
+        "theme": "default",
+        "breakpoints": [
+            {
+                "name": "Default",
+                "px": 0,
+                "cols": 12
+            }
+        ],
+        "order": 1,
+        "className": "",
+        "visible": true,
+        "disabled": false
+    },
+    {
+        "id": "a405ba644d6eab2e",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "@flowfuse/node-red-dashboard": "1.30.2",
+            "node-red-node-serialport": "2.0.3"
+        }
+    }
+]
