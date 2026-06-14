@@ -45,8 +45,7 @@
 
 ### Στάδια υλοποίησης
 * Σχεδιασμός κυκλώματος βάσει datasheet εξαρτημάτων
-* Κατασκευή θηκών με 3D εκτυπωτή για Arduino και Raspberry Pi [![3dprinting001](https://img.youtube.com/vi/JdvB8OSkEuA?si=HdFkgYy_vHghSWv7/maxresdefault.jpg)](https://www.youtube.com/watch?v=JdvB8OSkEuA?si=HdFkgYy_vHghSWv7)  
-<small>*click image to [open video](https://www.youtube.com/watch?v=JdvB8OSkEuA?si=HdFkgYy_vHghSWv7)*</small>
+* Κατασκευή θηκών με 3D εκτυπωτή για Arduino και Raspberry Pi ![3dprinting001](https://www.youtube.com/watch?v=JdvB8OSkEuA)
 
 * Στερέωση αισθητήρων σε ξύλινες επιφάνειες
 * Υλοποίηση πρωτότυπης πλακέτας μετρήσεων
