@@ -29,7 +29,7 @@ ___
 
 ---
 
-![Watt-Fi-Academy](images/a.jpg)
+![Watt-Fi-Academy-2026](../images/a.jpg)
 
 ---
 
