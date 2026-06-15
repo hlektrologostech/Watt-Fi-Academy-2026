@@ -255,26 +255,60 @@ void loop() {
 
 | Εξοπλισμός | Link |
 |---|---|
-
+| Arduino — επίσημη σελίδα | https://www.arduino.cc |
+| Arduino IDE — Download | https://www.arduino.cc/en/software/ |
+| Arduino Documentation | https://docs.arduino.cc |
+| Arduino Serial Communication | https://docs.arduino.cc/learn/communication/uart/ |
+| Arduino analogRead() — Reference | https://www.arduino.cc/reference/en/language/functions/analog-io/analogread/ |
+| Raspberry Pi Zero 2W — επίσημη σελίδα | https://www.raspberrypi.com/products/raspberry-pi-zero-2-w/ |
+| Raspberry Pi 500 — επίσημη σελίδα | https://www.raspberrypi.com/products/ |
+| Voltage Sensor Module — Datasheet | https://www.datasheethub.com/0-to-25v-dc-voltage-sensor-module/ |
+| Current Sensor Module ACS712 — Datasheet | https://easyelecmodule.com/acs712-hall-current-sensor-module/ |
 
 ### Λογισμικό
 
 | Λογισμικό | Link |
 |---|---|
-|Make Gifs From Images| https://www.3dgifmaker.com/ |
-
+| Node-RED — επίσημη σελίδα | https://nodered.org |
+| Node-RED — Getting Started | https://nodered.org/docs/getting-started/ |
+| Node-RED — Εγκατάσταση σε Raspberry Pi | https://nodered.org/docs/getting-started/raspberrypi |
+| Node-RED — Library (flows & nodes) | https://flows.nodered.org |
+| MoodleBox — επίσημη σελίδα | https://moodlebox.net |
+| MoodleBox — Οδηγός εγκατάστασης (βίντεο 1) | https://www.youtube.com/watch?v=OwwHUkaW1L4 |
+| MoodleBox — Οδηγός εγκατάστασης (βίντεο 2) | https://www.youtube.com/watch?v=xLTH_6V3Shg |
+| MoodleBox — FAQ | https://moodlebox.net/en/faq/ |
+| QElectroTech — σχεδίαση κυκλωμάτων | https://qelectrotech.org/index.php |
+| Make GIFs From Images | https://www.3dgifmaker.com/ |
 
 ### Διαγωνισμός
 
 | | Link |
 |---|---|
 | 8ος Διαγωνισμός OpenEdTech — ΕΛΛΑΚ | https://openedtech.ellak.gr/8th-openedtech/ |
+| Σελίδα project στο ΕΛΛΑΚ | https://openedtech.ellak.gr/robotics2026/electrohercules-watt-fi-academy/ |
 
 ### 3D Εκτύπωση
 
 | | Link |
 |---|---|
+| Arduino UNO R3 Case — Printables | https://www.printables.com/model/204598-arduino-uno-r3-case-with-reset-button/files |
+| RPi Zero DISP 7A Case — Printables | https://www.printables.com/model/791787-rpi-zero-disp-7a-case |
 
+### Βίντεο Project
+
+| Βίντεο | Link |
+|---|---|
+| 3D Εκτύπωση θηκών | https://www.youtube.com/watch?v=JdvB8OSkEuA |
+| Κολλητήρι & συναρμολόγηση πλακέτας | https://www.youtube.com/watch?v=cSmqkgk_FSA |
+| Λειτουργία συστήματος (Node-RED → MoodleBox) | https://www.youtube.com/watch?v=W-wXeqJ5V8U |
+| Τελικό βίντεο παρουσίασης project | https://www.youtube.com/watch?v=IQyAFFKZETg |
+
+### Κώδικας
+
+| | Link |
+|---|---|
+| Node-RED Flow — αρχείο JSON | https://github.com/hlektrologostech/Watt-Fi-Academy-2026/blob/main/code/NodeRedFlow.json |
+| Arduino — αρχείο INO | https://github.com/hlektrologostech/Watt-Fi-Academy-2026/blob/main/code/ArduinoCode.ino |
 
 ---
 
