@@ -35,7 +35,7 @@
 📎 **Χρήσιμα links:**
 - [QElectroTech](https://qelectrotech.org/index.php)
 - [Voltage Sensor Module](https://www.datasheethub.com/0-to-25v-dc-voltage-sensor-module/)
-- [Current Sensor Module](httpshttps://easyelecmodule.com/acs712-hall-current-sensor-module/)
+- [Current Sensor Module](https://easyelecmodule.com/acs712-hall-current-sensor-module/)
 
 
 ---
