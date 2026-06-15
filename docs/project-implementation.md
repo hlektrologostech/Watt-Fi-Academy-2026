@@ -194,6 +194,8 @@ void loop() {
 Συνδέσαμε ασύρματα το Node-RED (Raspberry Pi Zero 2W) με το MoodleBox (Raspberry Pi 500), ολοκληρώνοντας τον βασικό κύκλο μεταφοράς δεδομένων:
 
 <a href="https://github.com/hlektrologostech/Watt-Fi-Academy-2026/blob/main/code/NodeRedFlow.json" target="_blank">αρχείο με όλο τον κώδικα</a> 
+[![system](https://img.youtube.com/vi/W-wXeqJ5V8U/maxresdefault.jpg)](https://www.youtube.com/watch?v=W-wXeqJ5V8U)  
+<small>*click image to [open video](https://www.youtube.com/watch?v=W-wXeqJ5V8U)*</small>
 
 ---
 
@@ -203,7 +205,10 @@ void loop() {
 
 Καταγράψαμε επίσης τα βασικά προβλήματα που δεν μπορέσαμε να ξεπεράσουμε — με πρωταρχικό την ευαισθησία του αισθητήρα ρεύματος, που δεν ήταν ικανοποιητική για τα ρεύματα των κυκλωμάτων μας. Με αντιστάσεις μεγαλύτερης ισχύος (1W ή 2W) τα αποτελέσματα θα ήταν σίγουρα καλύτερα.
 
-![Έξυπνο εργαστήριο ηλεκτρολογίας με Arduino, Raspberry Pi & MoodleBox | ElectroHercules](https://www.youtube.com/watch?v=IQyAFFKZETg) 
+[![Έξυπνο εργαστήριο ηλεκτρολογίας με Arduino, Raspberry Pi & MoodleBox | ElectroHercules](https://img.youtube.com/vi/IQyAFFKZETg/maxresdefault.jpg)](https://www.youtube.com/watch?v=IQyAFFKZETg)  
+<small>*click image to [open video](https://www.youtube.com/watch?v=IQyAFFKZETg)*</small>
+
+
 ---
 
 ## ⚠️ Τι δεν ολοκληρώθηκε πλήρως
@@ -249,25 +254,13 @@ void loop() {
 
 | Εξοπλισμός | Link |
 |---|---|
-| Arduino — επίσημη σελίδα | https://www.arduino.cc |
-| Arduino IDE — Download | https://www.arduino.cc/en/software/ |
-| Arduino Documentation | https://docs.arduino.cc |
-| Arduino Serial Communication | https://docs.arduino.cc/learn/communication/uart/ |
-| Arduino analogRead() | https://www.arduino.cc/reference/en/language/functions/analog-io/analogread/ |
-| Raspberry Pi Zero 2W | https://www.raspberrypi.com/products/raspberry-pi-zero-2-w/ |
-| Raspberry Pi — όλα τα προϊόντα | https://www.raspberrypi.com/products/ |
+
 
 ### Λογισμικό
 
 | Λογισμικό | Link |
 |---|---|
-| Node-RED — επίσημη σελίδα | https://nodered.org |
-| Node-RED — Getting Started | https://nodered.org/docs/getting-started/ |
-| Node-RED — Εγκατάσταση σε Raspberry Pi | https://nodered.org/docs/getting-started/raspberrypi |
-| Node-RED — Library | https://flows.nodered.org |
-| MoodleBox — επίσημη σελίδα | https://moodlebox.net |
-| MoodleBox — Εγκατάσταση | https://moodlebox.net/en/help/install-moodlebox/ |
-| MoodleBox — FAQ | https://moodlebox.net/en/faq/ |
+
 
 ### Διαγωνισμός
 
@@ -279,8 +272,7 @@ void loop() {
 
 | | Link |
 |---|---|
-| Thingiverse — Raspberry Pi cases | https://www.thingiverse.com/search?q=raspberry+pi+case |
-| Printables.com | https://www.printables.com |
+
 
 ---
 
